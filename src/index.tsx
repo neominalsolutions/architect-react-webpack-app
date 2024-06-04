@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Link, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import AdminLayout from './layouts/admin.layout';
+import UsersPage from './pages/admin/users.page';
+import UserDetailPage from './pages/admin/users.detail.page';
 
 const App = () => {
 	return <>Hello</>;
@@ -26,7 +28,15 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: 'users', // /admin/users
-				element: <>Users page</>,
+				Component: UsersPage,
+			},
+			{
+				path: 'users/:id',
+				Component: UserDetailPage,
+			},
+			{
+				path: 'users/search',
+				Component: UserDetailPage,
 			},
 			{
 				path: 'roles', // /admin/roles
