@@ -13,7 +13,7 @@ const axiosInstance = axios.create({
 
 function OnRequestSuccess(config: InternalAxiosRequestConfig) {
 	console.log('request', config);
-	// config.headers = config.headers.setAuthorization('Bearer Token');
+
 	return config;
 }
 
@@ -27,7 +27,7 @@ function OnRequestError(error: AxiosError) {
 
 function OnReponseSuccess(response: AxiosResponse) {
 	console.log('reponse', response);
-	// return response.data.value;
+
 	return response;
 }
 
@@ -48,14 +48,14 @@ const httpClient = SetupInterceptors();
 export function get(endPoint: string, headers?: AxiosHeaders) {
 	return httpClient.get(endPoint, {
 		headers: headers,
-		signal: AbortSignal.timeout(5000),
+		signal: AbortSignal.timeout(3000),
 	});
 }
 
 export function post(endPoint: string, param: any, headers?: AxiosHeaders) {
 	return httpClient.post(endPoint, param, {
 		headers: headers,
-		signal: AbortSignal.timeout(5000),
+		signal: AbortSignal.timeout(3000),
 	});
 }
 
