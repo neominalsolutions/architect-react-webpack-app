@@ -5,6 +5,7 @@ import AdminLayout from './layouts/admin.layout';
 import UsersPage from './pages/admin/users.page';
 import UserDetailPage from './pages/admin/users.detail.page';
 import ProductsPage from './pages/products/products.page';
+import { HelmetProvider } from 'react-helmet-async';
 
 const App = () => {
 	return <>Hello</>;
@@ -22,8 +23,7 @@ const router = createBrowserRouter([
 		path: '/',
 		element: (
 			<>
-				<Link to="/login">Login</Link> {' '}
-				<Link to="/products">Ürünlerimiz</Link>
+				<Link to="/login">Login</Link> <Link to="/products">Ürünlerimiz</Link>
 				<p>Home Page</p>
 			</>
 		),
@@ -60,4 +60,8 @@ const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
 );
 
-root.render(<RouterProvider router={router} />);
+root.render(
+	<HelmetProvider>
+		<RouterProvider router={router} />
+	</HelmetProvider>
+);

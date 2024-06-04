@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { FormEvent, useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 function ProductsPage() {
@@ -49,6 +50,11 @@ function ProductsPage() {
 
 	return (
 		<>
+			<Helmet>
+				<title>Ürünlerimiz</title>
+				<meta name="description" content="React App"></meta>
+				<meta name="keywords" content="Products,Ürünler"></meta>
+			</Helmet>
 			<form method="GET" onSubmit={onFormSubmit}>
 				<input onChange={onSearchInput} placeholder="ürün ismi arayınız" />
 				<br></br>
