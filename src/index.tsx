@@ -4,6 +4,7 @@ import { Link, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import AdminLayout from './layouts/admin.layout';
 import UsersPage from './pages/admin/users.page';
 import UserDetailPage from './pages/admin/users.detail.page';
+import ProductsPage from './pages/products/products.page';
 
 const App = () => {
 	return <>Hello</>;
@@ -14,10 +15,15 @@ const router = createBrowserRouter([
 		element: <>Login Page</>,
 	},
 	{
+		path: '/products',
+		Component: ProductsPage,
+	},
+	{
 		path: '/',
 		element: (
 			<>
-				<Link to="/login">Login</Link>
+				<Link to="/login">Login</Link> {' '}
+				<Link to="/products">Ürünlerimiz</Link>
 				<p>Home Page</p>
 			</>
 		),
