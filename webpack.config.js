@@ -3,6 +3,10 @@ const htmlWebPack = require('html-webpack-plugin');
 module.exports = {
 	entry: './src/index.tsx', // uygulama giriş noktası, uygulama buradan bootstrap olur.
 	mode: 'development',
+	devServer: {
+		port: 3001,
+		historyApiFallback: true,
+	},
 	output: {
 		// uygulama çıktısında hangi isimde hangi klasör altında tutulacağı
 		filename: 'bundle.js',
@@ -18,6 +22,10 @@ module.exports = {
 				test: /\.(ts|tsx|js|jsx)$/,
 				exclude: /node_modules/,
 				use: 'babel-loader',
+			},
+			{
+				test: /\.css$/i,
+				use: ['style-loader', 'css-loader'],
 			},
 		],
 	},
