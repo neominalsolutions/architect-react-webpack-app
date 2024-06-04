@@ -19,6 +19,7 @@ function ProductsPage() {
 		if (mode === 'clientside') {
 			navigate(`/products?q=${productName}`);
 			loadData(); // yeniden render almadığında işlem sonrası operasyonu çağırdık
+			// window.scroll(0,0); // sayfada scroll varsa sayfayı en üste filtreleme sonrası çıkar.
 		} else {
 			window.location.href = `/products?q=${productName}`;
 		}
