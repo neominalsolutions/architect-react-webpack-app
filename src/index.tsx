@@ -12,6 +12,7 @@ import UserDetailPage from './pages/admin/users.detail.page';
 import ProductsPage from './pages/products/products.page';
 import { HelmetProvider } from 'react-helmet-async';
 import ReactMemoDemo from './pages/memoization/reactMemo/reactmemo.demo';
+import UseMemoDemo from './pages/memoization/useMemo/usememo.demo';
 
 const App = () => {
 	return <>Hello</>;
@@ -29,7 +30,8 @@ const router = createBrowserRouter([
 		path: '/memoization',
 		element: (
 			<div>
-				<Link to="/memoization/reactMemo"> React memo Demo</Link>
+				<Link to="/memoization/reactMemo"> React memo Demo</Link>{' '}
+				<Link to="/memoization/useMemo"> UseMemo Demo</Link>
 				<div>
 					<Outlet />
 				</div>
@@ -39,6 +41,10 @@ const router = createBrowserRouter([
 			{
 				path: 'reactMemo',
 				Component: ReactMemoDemo,
+			},
+			{
+				path: 'useMemo',
+				Component: UseMemoDemo,
 			},
 		],
 	},
