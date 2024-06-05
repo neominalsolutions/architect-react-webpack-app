@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
 import UseDataFetch from './usedata.fetch';
-
-interface Todo {
-	id: number;
-	title: string;
-	completed: boolean;
-}
+import { Todo } from '../../../models/todo.model';
 
 interface User {
 	id: number;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom/client';
 import {
 	Link,
@@ -21,6 +21,16 @@ import UseRefInputDemo, {
 import UseReducerDemo from './pages/memoization/useReducer/usereducer.demo';
 import UseImperativeHandleDemo from './pages/memoization/useImperative/useimperative.demo';
 import CustomHookDemo from './pages/memoization/customHook/custom.hook.demo';
+import Login from './pages/account/login.demo';
+import LoginDemo from './pages/account/login.demo';
+// import DebouncingDemo from './pages/memoization/debouncing/debouncing.demo';
+
+// Code Splitting ile ilk açılış performans takniği
+const DebouncingDemo = lazy(
+	() => import('./pages/memoization/debouncing/debouncing.demo')
+);
+
+// Tüm yukarıdaki Import kısımlarını lazy load işlemine çeviriyoruz.
 
 const App = () => {
 	return <>Hello</>;
@@ -28,7 +38,7 @@ const App = () => {
 const router = createBrowserRouter([
 	{
 		path: '/login',
-		element: <>Login Page</>,
+		Component: LoginDemo,
 	},
 	{
 		path: '/products',
@@ -51,7 +61,8 @@ const router = createBrowserRouter([
 				</Link>{' '}
 				<Link to="/memoization/useReducerDemo"> UseReducer Demo</Link>{' '}
 				<Link to="/memoization/useImperativeDemo"> UseImperativeDemo Demo</Link>{' '}
-				<Link to="/memoization/customHook"> Custom Hook Demo</Link>
+				<Link to="/memoization/customHook"> Custom Hook Demo</Link>{' '}
+				<Link to="/memoization/debouncingDemo"> Debouncing Demo</Link>
 				<div>
 					<Outlet />
 				</div>
@@ -93,6 +104,10 @@ const router = createBrowserRouter([
 			{
 				path: 'customHook',
 				Component: CustomHookDemo,
+			},
+			{
+				path: 'debouncingDemo',
+				Component: DebouncingDemo,
 			},
 		],
 	},
@@ -138,7 +153,9 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-	<HelmetProvider>
-		<RouterProvider router={router} />
-	</HelmetProvider>
+	<Suspense fallback={<>Component Doma yüklenemedi</>}>
+		<HelmetProvider>
+			<RouterProvider router={router} />
+		</HelmetProvider>
+	</Suspense>
 );

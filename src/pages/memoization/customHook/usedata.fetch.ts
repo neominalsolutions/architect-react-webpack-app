@@ -13,7 +13,13 @@ function UseDataFetch<ResponseType>(endPoint: string, header?: AxiosHeaders) {
 	const loadData = async () => {
 		try {
 			const data = (await httpClientModule.get(endPoint, header)).data;
-			setResponse(data);
+
+			if (data.value) {
+				setResponse(data.value);
+			} else {
+				setResponse(data);
+			}
+
 			setLoading(false);
 		} catch (error) {
 			setError(error);
