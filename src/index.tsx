@@ -18,6 +18,7 @@ import UseRefInputDemo, {
 	BackgroundVariables,
 	UseRefInputDemoWithState,
 } from './pages/memoization/useRef/useref.demo';
+import UseReducerDemo from './pages/memoization/useReducer/usereducer.demo';
 
 const App = () => {
 	return <>Hello</>;
@@ -43,7 +44,10 @@ const router = createBrowserRouter([
 					{' '}
 					UseRef Input With State Demo
 				</Link>
-				<Link to="/memoization/backgroundVariables">Background Variables</Link>
+				<Link to="/memoization/backgroundVariables">
+					Background Variables
+				</Link>{' '}
+				<Link to="/memoization/useReducerDemo"> UseReducer Demo</Link>
 				<div>
 					<Outlet />
 				</div>
@@ -73,6 +77,10 @@ const router = createBrowserRouter([
 			{
 				path: 'backgroundVariables',
 				Component: BackgroundVariables,
+			},
+			{
+				path: 'useReducerDemo',
+				Component: UseReducerDemo,
 			},
 		],
 	},
