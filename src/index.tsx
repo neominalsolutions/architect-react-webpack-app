@@ -1,11 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Link, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import {
+	Link,
+	Outlet,
+	RouterProvider,
+	createBrowserRouter,
+} from 'react-router-dom';
 import AdminLayout from './layouts/admin.layout';
 import UsersPage from './pages/admin/users.page';
 import UserDetailPage from './pages/admin/users.detail.page';
 import ProductsPage from './pages/products/products.page';
 import { HelmetProvider } from 'react-helmet-async';
+import ReactMemoDemo from './pages/memoization/reactMemo/reactmemo.demo';
 
 const App = () => {
 	return <>Hello</>;
@@ -18,6 +24,23 @@ const router = createBrowserRouter([
 	{
 		path: '/products',
 		Component: ProductsPage,
+	},
+	{
+		path: '/memoization',
+		element: (
+			<div>
+				<Link to="/memoization/reactMemo"> React memo Demo</Link>
+				<div>
+					<Outlet />
+				</div>
+			</div>
+		),
+		children: [
+			{
+				path: 'reactMemo',
+				Component: ReactMemoDemo,
+			},
+		],
 	},
 	{
 		path: '/',
