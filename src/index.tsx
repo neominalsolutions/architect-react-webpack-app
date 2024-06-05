@@ -13,6 +13,11 @@ import ProductsPage from './pages/products/products.page';
 import { HelmetProvider } from 'react-helmet-async';
 import ReactMemoDemo from './pages/memoization/reactMemo/reactmemo.demo';
 import UseMemoDemo from './pages/memoization/useMemo/usememo.demo';
+import UseCallBackParentDemo from './pages/memoization/useCallback/usecallback.parent.demo';
+import UseRefInputDemo, {
+	BackgroundVariables,
+	UseRefInputDemoWithState,
+} from './pages/memoization/useRef/useref.demo';
 
 const App = () => {
 	return <>Hello</>;
@@ -31,7 +36,14 @@ const router = createBrowserRouter([
 		element: (
 			<div>
 				<Link to="/memoization/reactMemo"> React memo Demo</Link>{' '}
-				<Link to="/memoization/useMemo"> UseMemo Demo</Link>
+				<Link to="/memoization/useMemo"> UseMemo Demo</Link>{' '}
+				<Link to="/memoization/useCallback">UseCallback Demo</Link>{' '}
+				<Link to="/memoization/useRefInputDemo">UseRef Input Demo</Link>{' '}
+				<Link to="/memoization/useRefInputWithStateDemo">
+					{' '}
+					UseRef Input With State Demo
+				</Link>
+				<Link to="/memoization/backgroundVariables">Background Variables</Link>
 				<div>
 					<Outlet />
 				</div>
@@ -45,6 +57,22 @@ const router = createBrowserRouter([
 			{
 				path: 'useMemo',
 				Component: UseMemoDemo,
+			},
+			{
+				path: 'useCallback',
+				Component: UseCallBackParentDemo,
+			},
+			{
+				path: 'useRefInputDemo',
+				Component: UseRefInputDemo,
+			},
+			{
+				path: 'useRefInputWithStateDemo',
+				Component: UseRefInputDemoWithState,
+			},
+			{
+				path: 'backgroundVariables',
+				Component: BackgroundVariables,
 			},
 		],
 	},
