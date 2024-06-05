@@ -20,6 +20,7 @@ import UseRefInputDemo, {
 } from './pages/memoization/useRef/useref.demo';
 import UseReducerDemo from './pages/memoization/useReducer/usereducer.demo';
 import UseImperativeHandleDemo from './pages/memoization/useImperative/useimperative.demo';
+import CustomHookDemo from './pages/memoization/customHook/custom.hook.demo';
 
 const App = () => {
 	return <>Hello</>;
@@ -49,7 +50,8 @@ const router = createBrowserRouter([
 					Background Variables
 				</Link>{' '}
 				<Link to="/memoization/useReducerDemo"> UseReducer Demo</Link>{' '}
-				<Link to="/memoization/useImperativeDemo"> UseImperativeDemo Demo</Link>
+				<Link to="/memoization/useImperativeDemo"> UseImperativeDemo Demo</Link>{' '}
+				<Link to="/memoization/customHook"> Custom Hook Demo</Link>
 				<div>
 					<Outlet />
 				</div>
@@ -87,6 +89,10 @@ const router = createBrowserRouter([
 			{
 				path: 'useImperativeDemo',
 				Component: UseImperativeHandleDemo,
+			},
+			{
+				path: 'customHook',
+				Component: CustomHookDemo,
 			},
 		],
 	},

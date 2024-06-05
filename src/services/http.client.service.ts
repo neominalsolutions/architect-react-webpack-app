@@ -33,7 +33,7 @@ function OnReponseSuccess(response: AxiosResponse) {
 
 function OnResponseError(error: AxiosError) {
 	console.log('response-error', error);
-	return error;
+	return Promise.reject(error);
 }
 
 function SetupInterceptors() {
