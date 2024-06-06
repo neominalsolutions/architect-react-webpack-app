@@ -1,5 +1,6 @@
 import React, { Suspense, lazy, useContext, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
+
 import {
 	Link,
 	Outlet,
@@ -56,7 +57,11 @@ const App = () => {
 			<Link to="/global-state">Context API / Redux</Link>{' '}
 			<Link to="/products">Ürünlerimiz</Link>
 			<Link to="/swr">Swr</Link> <Link to="/forms-hook">Forms Hook</Link>
-			<p>Home Page</p>
+			<br></br>
+			<button className="bg-red-300 hover:bg-blue-700 text-white font-bold py-2 px-3">
+				Button
+			</button>
+			<h1 className="text-3xl font-bold underline">Hello world!</h1>
 		</>
 	);
 };

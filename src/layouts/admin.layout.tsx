@@ -7,7 +7,7 @@ import {
 	useLocation,
 	useNavigate,
 } from 'react-router-dom';
-import './layout.css';
+import './layout.scss';
 
 // Dosya isimleri küçük Component isimleri büyü harf ile başlayacak şekilde yazılacak.
 function AdminLayout() {

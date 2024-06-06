@@ -1,10 +1,12 @@
 const path = require('path'); // EC module system yerine CommonJS NodeJS module sistem kullkanılmış.
 const htmlWebPack = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 module.exports = {
 	entry: './src/index.tsx', // uygulama giriş noktası, uygulama buradan bootstrap olur.
 	mode: 'development',
 	devServer: {
-		port: 3001,
+		port: 3009,
 		historyApiFallback: true,
 	},
 	output: {
@@ -24,8 +26,14 @@ module.exports = {
 				use: 'babel-loader',
 			},
 			{
-				test: /\.css$/i,
-				use: ['style-loader', 'css-loader'],
+				test: /\.(s(a|c)ss)$/,
+				include: path.resolve(__dirname, 'src'),
+				use: [
+					MiniCssExtractPlugin.loader,
+					'css-loader',
+					'sass-loader',
+					'postcss-loader',
+				],
 			},
 			{
 				test: /\.(png|jpe?g|gif|svg)$/i,
@@ -37,6 +45,7 @@ module.exports = {
 		new htmlWebPack({
 			template: './src/index.html',
 		}),
+		new MiniCssExtractPlugin(),
 	],
 };
 

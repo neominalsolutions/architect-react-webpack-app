@@ -4,7 +4,7 @@ import {
 	getProducts,
 } from '../../../services/product.mock.service';
 
-import './products.page.css';
+import './products.page.scss';
 import { CartContext, CartContextType } from '../contextapi/cart.context';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
