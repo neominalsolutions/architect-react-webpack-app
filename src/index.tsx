@@ -37,6 +37,7 @@ import { loadFromReduxLocalStorage } from './pages/globalstates/store/cart.reduc
 import TodoReduxPage from './pages/globalstates/pages/todo.redux.page';
 import { fetchTodos } from './pages/globalstates/store/todo.reducer';
 import ProductsSwrPaginationDemo from './pages/swr/products.swr.pagination.demo';
+import LoginFormDemoPage from './pages/reactFormsHook/login.form.demo';
 // import DebouncingDemo from './pages/memoization/debouncing/debouncing.demo';
 
 // Code Splitting ile ilk açılış performans takniği
@@ -53,8 +54,8 @@ const App = () => {
 		<>
 			<Link to="/login">Login</Link> <Link to="/memoization">Memoization</Link>{' '}
 			<Link to="/global-state">Context API / Redux</Link>{' '}
-			<Link to="/products">Ürünlerimiz</Link>{' '}
-			<Link to="/swr">Swr</Link>
+			<Link to="/products">Ürünlerimiz</Link>
+			<Link to="/swr">Swr</Link> <Link to="/forms-hook">Forms Hook</Link>
 			<p>Home Page</p>
 		</>
 	);
@@ -85,6 +86,10 @@ const GlobalStateHomePage = () => {
 };
 
 const router = createBrowserRouter([
+	{
+		path: '/forms-hook',
+		Component: LoginFormDemoPage,
+	},
 	{
 		path: '/swr',
 		Component: ProductsSwrPaginationDemo,
