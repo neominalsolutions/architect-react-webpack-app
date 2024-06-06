@@ -53,10 +53,10 @@ function LoginFormDemoPage() {
 						required: { value: true, message: 'E-posta boş geçilemez' },
 					})}
 				/> */}
-				<input {...register('email')} />
+				<input type="text" {...register('email')} />
 				<span>{errors.email?.message}</span>
 				<br></br>
-				<input {...register('password')} />
+				<input type="text" {...register('password')} />
 				<span>{errors.password?.message}</span>
 				<br></br>
 				<input disabled={!isValid} type="submit" />

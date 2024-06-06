@@ -5,3 +5,44 @@
 
 
 
+select {
+  border:1px solid blue;
+  margin-right: 5px;
+}
+
+
+input[type='text'] {
+  border:1px solid blue;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+
+input[type='number'] {
+  border:1px solid blue;
+  margin-right: 5px;
+}
+
+input[type='submit'] {
+ border:1px solid blue;
+  background-color: blue;
+  color: white;
+  padding: 5px;
+  margin-right: 5px;
+  margin-top: 10px;
+}
+
+
+button {
+  border:1px solid blue;
+  background-color: blue;
+  color: white;
+  padding: 5px;
+  margin-right: 5px;
+}
+
+$base-color: #c6538c;
+$border-dark: rgba($base-color, 0.88);
+
+.alert {
+  border: 1px solid $border-dark;
+}
