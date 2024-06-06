@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useContext, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import {
 	Link,
@@ -24,7 +24,12 @@ import CustomHookDemo from './pages/memoization/customHook/custom.hook.demo';
 import Login from './pages/account/login.demo';
 import LoginDemo from './pages/account/login.demo';
 import ProductPages from './pages/globalstates/contextapi/products.page';
-import CartProvider from './pages/globalstates/store/cart.context';
+import CartProvider, {
+	CartContext,
+	CartContextType,
+} from './pages/globalstates/store/cart.context';
+import CartSummary from './pages/globalstates/contextapi/cart.summary.page';
+import CartSummaryPage from './pages/globalstates/contextapi/cart.summary.page';
 // import DebouncingDemo from './pages/memoization/debouncing/debouncing.demo';
 
 // Code Splitting ile ilk açılış performans takniği
@@ -35,8 +40,37 @@ const DebouncingDemo = lazy(
 // Tüm yukarıdaki Import kısımlarını lazy load işlemine çeviriyoruz.
 
 const App = () => {
-	return <>Hello</>;
+	// uygulama refleshlendiğinde buraya düşecek ve burdan session storage bir bilgi varsa session güncellenecek.
+
+	return (
+		<>
+			<Link to="/login">Login</Link> <Link to="/memoization">Memoization</Link>{' '}
+			<Link to="/global-state">Context API / Redux</Link>{' '}
+			<Link to="/products">Ürünlerimiz</Link>
+			<p>Home Page</p>
+		</>
+	);
 };
+
+const GlobalStateHomePage = () => {
+	const { loadFromStorage } = useContext(CartContext) as CartContextType;
+
+	useEffect(() => {
+		console.log('global state init');
+		loadFromStorage();
+	}, []);
+
+	return (
+		<>
+			<nav>
+				<Link to="/global-state/products">Ürünler </Link>
+				<Link to="/global-state/cart-summary">Sepet Detay</Link>
+			</nav>
+			<Outlet />
+		</>
+	);
+};
+
 const router = createBrowserRouter([
 	{
 		path: '/login',
@@ -48,19 +82,15 @@ const router = createBrowserRouter([
 	},
 	{
 		path: '/global-state',
-		element: (
-			<>
-				<nav>
-					<Link to="/global-state/products">Ürünler </Link>
-					<Link to="/global-state/cart-summary">Sepet Detay</Link>
-				</nav>
-				<Outlet />
-			</>
-		),
+		Component: GlobalStateHomePage,
 		children: [
 			{
 				path: 'products',
 				Component: ProductPages,
+			},
+			{
+				path: 'cart-summary',
+				Component: CartSummaryPage,
 			},
 		],
 	},
@@ -133,15 +163,7 @@ const router = createBrowserRouter([
 	},
 	{
 		path: '/',
-		element: (
-			<>
-				<Link to="/login">Login</Link>{' '}
-				<Link to="/memoization">Memoization</Link>{' '}
-				<Link to="/global-state">Context API / Redux</Link>{' '}
-				<Link to="/products">Ürünlerimiz</Link>
-				<p>Home Page</p>
-			</>
-		),
+		Component: App,
 	},
 	{
 		path: '/admin', // prefix (Nested Routing, Nested Layout)

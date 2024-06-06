@@ -19,6 +19,7 @@ export type CartContextType = {
 	cart: CartState;
 	addToCart: (item: CartItem) => void;
 	removeFromCart: (id: number) => void;
+	loadFromStorage: () => void;
 };
 
 // component üzerinden veriye erişimizi context sağlar
@@ -41,15 +42,24 @@ function CartProvider({ children }: CartProps) {
 	const [cart, setCart] = useState<CartState>({ items: [], total: 0 });
 
 	const addToCart = (item: CartItem) => {
-		cart.items = [...cart.items, item];
+		const itemExist = cart.items.find((x) => x.id === item.id);
+
 		let total: number = 0;
 
+		if (itemExist) {
+			itemExist.quantity += 1;
+			cart.items = [...cart.items];
+		} else {
+			cart.items = [...cart.items, item];
+		}
+
 		cart.items.forEach((item) => {
-			total += item.price;
+			total += item.price * item.quantity;
 		});
 		cart.total = total;
-
 		setCart({ ...cart });
+		// sessionStorage.setItem('cart', JSON.stringify(cart));
+		localStorage.setItem('cart', JSON.stringify(cart));
 	};
 
 	const removeFromCart = (id: number) => {
@@ -57,17 +67,31 @@ function CartProvider({ children }: CartProps) {
 		cart.items = [...items];
 		let total: number = 0;
 		cart.items.forEach((item) => {
-			total += item.price;
+			total += item.price * item.quantity;
 		});
 		cart.total = total;
 
 		setCart({ ...cart });
 	};
 
+	// session bazlı verinin sepet bilginin tarayıcı refleshlendiğinde tekrardan yüklenmesini client state aktarılmasını sağladık.
+	const loadFromStorage = () => {
+		// const cart = sessionStorage.getItem('cart');
+
+		const cart = localStorage.getItem('cart');
+		console.log('cartState from load', cart);
+
+		if (cart) {
+			const cartObject = JSON.parse(cart) as CartState;
+			setCart({ ...cartObject });
+		}
+	};
+
 	const values = {
 		cart,
 		addToCart,
 		removeFromCart,
+		loadFromStorage,
 	};
 
 	return <CartContext.Provider value={values}>{children}</CartContext.Provider>;
