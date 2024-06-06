@@ -23,13 +23,15 @@ import UseImperativeHandleDemo from './pages/memoization/useImperative/useimpera
 import CustomHookDemo from './pages/memoization/customHook/custom.hook.demo';
 import Login from './pages/account/login.demo';
 import LoginDemo from './pages/account/login.demo';
-import ProductPages from './pages/globalstates/contextapi/products.page';
+import ProductPages from './pages/globalstates/pages/products.page';
 import CartProvider, {
 	CartContext,
 	CartContextType,
-} from './pages/globalstates/store/cart.context';
-import CartSummary from './pages/globalstates/contextapi/cart.summary.page';
-import CartSummaryPage from './pages/globalstates/contextapi/cart.summary.page';
+} from './pages/globalstates/contextapi/cart.context';
+import CartSummary from './pages/globalstates/pages/cart.summary.page';
+import CartSummaryPage from './pages/globalstates/pages/cart.summary.page';
+import { Provider } from 'react-redux';
+import { store } from './pages/globalstates/store/redux.store';
 // import DebouncingDemo from './pages/memoization/debouncing/debouncing.demo';
 
 // Code Splitting ile ilk açılış performans takniği
@@ -200,9 +202,13 @@ const root = ReactDOM.createRoot(
 root.render(
 	<Suspense fallback={<>Component Doma yüklenemedi</>}>
 		<HelmetProvider>
-			<CartProvider>
-				<RouterProvider router={router} />
-			</CartProvider>
+			<Provider store={store}>
+				<CartProvider>
+					<RouterProvider router={router} />
+				</CartProvider>
+			</Provider>
 		</HelmetProvider>
 	</Suspense>
 );
+
+// 2. Adım react-redux paketindeki provider tanımı

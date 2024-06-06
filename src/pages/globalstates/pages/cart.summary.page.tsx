@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { CartContext, CartContextType } from '../store/cart.context';
+import { CartContext, CartContextType } from '../contextapi/cart.context';
 
 function CartSummaryPage() {
 	const { cart, removeFromCart } = useContext(CartContext) as CartContextType;
