@@ -23,6 +23,8 @@ import UseImperativeHandleDemo from './pages/memoization/useImperative/useimpera
 import CustomHookDemo from './pages/memoization/customHook/custom.hook.demo';
 import Login from './pages/account/login.demo';
 import LoginDemo from './pages/account/login.demo';
+import ProductPages from './pages/globalstates/contextapi/products.page';
+import CartProvider from './pages/globalstates/store/cart.context';
 // import DebouncingDemo from './pages/memoization/debouncing/debouncing.demo';
 
 // Code Splitting ile ilk açılış performans takniği
@@ -43,6 +45,24 @@ const router = createBrowserRouter([
 	{
 		path: '/products',
 		Component: ProductsPage,
+	},
+	{
+		path: '/global-state',
+		element: (
+			<>
+				<nav>
+					<Link to="/global-state/products">Ürünler </Link>
+					<Link to="/global-state/cart-summary">Sepet Detay</Link>
+				</nav>
+				<Outlet />
+			</>
+		),
+		children: [
+			{
+				path: 'products',
+				Component: ProductPages,
+			},
+		],
 	},
 	{
 		path: '/memoization',
@@ -115,7 +135,10 @@ const router = createBrowserRouter([
 		path: '/',
 		element: (
 			<>
-				<Link to="/login">Login</Link> <Link to="/products">Ürünlerimiz</Link>
+				<Link to="/login">Login</Link>{' '}
+				<Link to="/memoization">Memoization</Link>{' '}
+				<Link to="/global-state">Context API / Redux</Link>{' '}
+				<Link to="/products">Ürünlerimiz</Link>
 				<p>Home Page</p>
 			</>
 		),
@@ -155,7 +178,9 @@ const root = ReactDOM.createRoot(
 root.render(
 	<Suspense fallback={<>Component Doma yüklenemedi</>}>
 		<HelmetProvider>
-			<RouterProvider router={router} />
+			<CartProvider>
+				<RouterProvider router={router} />
+			</CartProvider>
 		</HelmetProvider>
 	</Suspense>
 );
