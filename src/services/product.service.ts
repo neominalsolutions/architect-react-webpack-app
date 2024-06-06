@@ -7,7 +7,7 @@ export const getProducts = async (endpoint?: string) => {
 		const response = await httpClientModule.get(endpoint as string);
 		// console.log('veri', response);
 		// return response;
-		return response.data;
+		return response.data.value;
 	} catch (error) {
 		return Promise.reject(error);
 	}
