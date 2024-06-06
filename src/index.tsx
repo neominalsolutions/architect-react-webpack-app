@@ -48,6 +48,8 @@ const DebouncingDemo = lazy(
 
 // Tüm yukarıdaki Import kısımlarını lazy load işlemine çeviriyoruz.
 
+import './style.scss';
+
 const App = () => {
 	// uygulama refleshlendiğinde buraya düşecek ve burdan session storage bir bilgi varsa session güncellenecek.
 
@@ -58,7 +60,7 @@ const App = () => {
 			<Link to="/products">Ürünlerimiz</Link>
 			<Link to="/swr">Swr</Link> <Link to="/forms-hook">Forms Hook</Link>
 			<br></br>
-			<button className="bg-red-300 hover:bg-blue-700 text-white font-bold py-2 px-3">
+			<button className="bg-red-300 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded-full">
 				Button
 			</button>
 			<h1 className="text-3xl font-bold underline">Hello world!</h1>
