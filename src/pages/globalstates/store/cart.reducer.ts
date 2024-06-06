@@ -18,6 +18,16 @@ const cartSlice = createSlice({
 	name: 'CART',
 	initialState: initialState,
 	reducers: {
+		loadFromReduxLocalStorage: (state: ReduxCartState) => {
+			const cart = localStorage.getItem('reduxCartState');
+			console.log('cartState from load', cart);
+
+			if (cart) {
+				const cartObject = JSON.parse(cart) as ReduxCartState;
+				state.items = cartObject.items;
+				state.total = cartObject.total;
+			}
+		},
 		//state değiştireceğimiz algoritmayı function bazlı yazıyoruz
 		ReduxAddToCart: (
 			state: ReduxCartState,
@@ -39,6 +49,8 @@ const cartSlice = createSlice({
 			});
 
 			state.total = total;
+
+			localStorage.setItem('reduxCartState', JSON.stringify(state));
 		},
 		ReduxRemoveFromCart: (
 			state: ReduxCartState,
@@ -53,11 +65,21 @@ const cartSlice = createSlice({
 			});
 
 			state.total = total;
+
+			if (state.total !== 0) {
+				localStorage.setItem('reduxCartState', JSON.stringify(state));
+			} else {
+				localStorage.removeItem('reduxCartState');
+			}
 		},
 	},
 });
 
 export const cartReducer = cartSlice.reducer;
-export const { ReduxAddToCart, ReduxRemoveFromCart } = cartSlice.actions;
+export const {
+	ReduxAddToCart,
+	ReduxRemoveFromCart,
+	loadFromReduxLocalStorage,
+} = cartSlice.actions;
 
 // 3. adım reducer yazdık store reducer tanımladık.

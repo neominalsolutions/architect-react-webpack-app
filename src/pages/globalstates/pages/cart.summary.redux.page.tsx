@@ -1,13 +1,16 @@
 import React, { useContext } from 'react';
 import { CartContext, CartContextType } from '../contextapi/cart.context';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../store/redux.store';
+import { ReduxCartState, ReduxRemoveFromCart } from '../store/cart.reducer';
 
-function CartSummaryPage() {
-	const { cart, removeFromCart } = useContext(CartContext) as CartContextType;
-
+function CartSummaryReduxPage() {
+	const cartState = useSelector((state: RootState) => state.cartState);
+	const dispatch = useDispatch<AppDispatch>();
 
 	const onDeleteItem = (id: number) => {
-		removeFromCart(id);
 		// State değişiminde component virtual domdan dolayı render alır.
+		dispatch(ReduxRemoveFromCart({ id: id }));
 	};
 
 	return (
@@ -20,7 +23,7 @@ function CartSummaryPage() {
 					justifyContent: 'space-between',
 				}}
 			>
-				{cart.items.map((item) => {
+				{cartState.items.map((item) => {
 					return (
 						<div key={item.id}>
 							<div>
@@ -36,10 +39,10 @@ function CartSummaryPage() {
 					);
 				})}
 
-				<div>Total: {cart.total.toFixed(2)} TL</div>
+				<div>Total: {cartState.total.toFixed(2)} TL</div>
 			</div>
 		</>
 	);
 }
 
-export default CartSummaryPage;
+export default CartSummaryReduxPage;

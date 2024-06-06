@@ -30,8 +30,10 @@ import CartProvider, {
 } from './pages/globalstates/contextapi/cart.context';
 import CartSummary from './pages/globalstates/pages/cart.summary.page';
 import CartSummaryPage from './pages/globalstates/pages/cart.summary.page';
-import { Provider } from 'react-redux';
-import { store } from './pages/globalstates/store/redux.store';
+import { Provider, useDispatch } from 'react-redux';
+import { AppDispatch, store } from './pages/globalstates/store/redux.store';
+import CartSummaryReduxPage from './pages/globalstates/pages/cart.summary.redux.page';
+import { loadFromReduxLocalStorage } from './pages/globalstates/store/cart.reducer';
 // import DebouncingDemo from './pages/memoization/debouncing/debouncing.demo';
 
 // Code Splitting ile ilk açılış performans takniği
@@ -56,17 +58,20 @@ const App = () => {
 
 const GlobalStateHomePage = () => {
 	const { loadFromStorage } = useContext(CartContext) as CartContextType;
+	const dispatch = useDispatch<AppDispatch>();
 
 	useEffect(() => {
 		console.log('global state init');
-		loadFromStorage();
+		loadFromStorage(); // contextAPI doldurma
+		dispatch(loadFromReduxLocalStorage()); // Redux ile doldurma
 	}, []);
 
 	return (
 		<>
 			<nav>
-				<Link to="/global-state/products">Ürünler </Link>
-				<Link to="/global-state/cart-summary">Sepet Detay</Link>
+				<Link to="/global-state/products">Ürünler </Link>{' '}
+				<Link to="/global-state/cart-summary">Sepet Detay</Link>{' '}
+				<Link to="/global-state/cart-summary-v2">Sepet Detay Redux</Link>
 			</nav>
 			<Outlet />
 		</>
@@ -93,6 +98,10 @@ const router = createBrowserRouter([
 			{
 				path: 'cart-summary',
 				Component: CartSummaryPage,
+			},
+			{
+				path: 'cart-summary-v2',
+				Component: CartSummaryReduxPage,
 			},
 		],
 	},
