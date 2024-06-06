@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { cartReducer } from './cart.reducer';
+import { todoReducer } from './todo.reducer';
 
 export const store = configureStore({
 	reducer: {
 		cartState: cartReducer, // store reducer tanıttığımız kısım.
+		todoState: todoReducer,
 	},
 });
 

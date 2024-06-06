@@ -34,6 +34,8 @@ import { Provider, useDispatch } from 'react-redux';
 import { AppDispatch, store } from './pages/globalstates/store/redux.store';
 import CartSummaryReduxPage from './pages/globalstates/pages/cart.summary.redux.page';
 import { loadFromReduxLocalStorage } from './pages/globalstates/store/cart.reducer';
+import TodoReduxPage from './pages/globalstates/pages/todo.redux.page';
+import { fetchTodos } from './pages/globalstates/store/todo.reducer';
 // import DebouncingDemo from './pages/memoization/debouncing/debouncing.demo';
 
 // Code Splitting ile ilk açılış performans takniği
@@ -64,6 +66,7 @@ const GlobalStateHomePage = () => {
 		console.log('global state init');
 		loadFromStorage(); // contextAPI doldurma
 		dispatch(loadFromReduxLocalStorage()); // Redux ile doldurma
+		dispatch(fetchTodos()); // asenkron olarak veriyi api ye git load et.
 	}, []);
 
 	return (
@@ -71,7 +74,8 @@ const GlobalStateHomePage = () => {
 			<nav>
 				<Link to="/global-state/products">Ürünler </Link>{' '}
 				<Link to="/global-state/cart-summary">Sepet Detay</Link>{' '}
-				<Link to="/global-state/cart-summary-v2">Sepet Detay Redux</Link>
+				<Link to="/global-state/cart-summary-v2">Sepet Detay Redux</Link>{' '}
+				<Link to="/global-state/todo-redux">Todo Redux Page</Link>
 			</nav>
 			<Outlet />
 		</>
@@ -102,6 +106,10 @@ const router = createBrowserRouter([
 			{
 				path: 'cart-summary-v2',
 				Component: CartSummaryReduxPage,
+			},
+			{
+				path: 'todo-redux',
+				Component: TodoReduxPage,
 			},
 		],
 	},
